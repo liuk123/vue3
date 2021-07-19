@@ -30,8 +30,8 @@ if (modules) { // 开发环境
   console.log(`全部模块，总共：${getModulesCount()} 个，建议采用模块化按需编译方式！\n`)
   buildDynamicModules.push('require.context("@modules", true, /^\\.\\/[a-zA-Z]+\\/index\\.js$/)')
 }
-// 创建虚拟模块文件（hack）
 
+// 创建虚拟模块文件（hack）
 const virtualModules = new VirtualModulesPlugin({
   'node_modules/vue-dynamic-modules.js': `module.exports = [${buildDynamicModules.join(',')}];`
 })
@@ -121,14 +121,13 @@ module.exports = {
       alias: {
         '@modules': path.resolve(process.cwd(), 'src-modules'),
         '@': path.resolve(process.cwd(), 'src'),
-        // 'vue': path.resolve(process.cwd(), 'node_modules/vue/dist/vue.esm-bundler.js')
       }
     },
     plugins: [
       new webpack.ProvidePlugin({
-        PubSub: 'pubsub-js',
-        dayjs: 'dayjs',
-        $: 'jquery',
+        // PubSub: 'pubsub-js',
+        // dayjs: 'dayjs',
+        // $: 'jquery',
       }),
       virtualModules
     ]

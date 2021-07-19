@@ -13,3 +13,5 @@ const router = VueRouter.createRouter({
 
 
 export default router
+
+// const Login = () => import('../views/Login')

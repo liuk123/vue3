@@ -14,7 +14,6 @@ export default ({ router, store }) => {
   return Promise.all(dynamicModules).then((moduleInstances: any) => {
     for (const curModule of moduleInstances) {
       curModule.keys().map(key => {
-        // 解析module
         const m = curModule(key).default
         if (m.moduleName) { regist({ router, store }, m) }
       })
