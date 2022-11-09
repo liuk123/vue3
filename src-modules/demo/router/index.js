@@ -1,8 +1,7 @@
-const About = { template: '<div>About</div>' }
-
+import Hello from '../views/Hello'
 const routes = [
   {
-    path: '/about', component: About
+    path: '/hello', component: Hello
   },
 ]
 export default routes

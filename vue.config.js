@@ -9,26 +9,27 @@ const path = require('path')
 const getModulesCount = () => fs.readdirSync('./src-modules/').length
 
 // 获取编译模块
-const modules = 'demo,demo2'
+const modules = 'demo'
 // 返回模块虚拟
 let buildDynamicModules = []
 if (modules) { // 开发环境
   buildDynamicModules = modules.split(',').map((module, index) => {
+    console.log(module)
     // eslint-disable-next-line no-console
     console.log(`编译模块(${index + 1})：${module}\n`)
-    fs.access(path.join(`./src-modules/${module}/index.js`), function (err) {
+    fs.access(path.join(`./src-modules/${module}/index.ts`), function (err) {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(`\n\n注意：${module} 模块不存在!\n`)
         process.exit(0)
       }
     })
-    return `require.context("@modules/${module}", false, /index\\.js$/)`
+    return `require.context("@modules/${module}", false, /index\\.ts$/)`
   })
 } else {
   // eslint-disable-next-line no-console
   console.log(`全部模块，总共：${getModulesCount()} 个，建议采用模块化按需编译方式！\n`)
-  buildDynamicModules.push('require.context("@modules", true, /^\\.\\/[a-zA-Z]+\\/index\\.js$/)')
+  buildDynamicModules.push('require.context("@modules", true, /^\\.\\/[a-zA-Z]+\\/index\\.ts$/)')
 }
 
 // 创建虚拟模块文件（hack）
@@ -121,6 +122,7 @@ module.exports = {
       alias: {
         '@modules': path.resolve(process.cwd(), 'src-modules'),
         '@': path.resolve(process.cwd(), 'src'),
+        Rx: path.join(__dirname, 'node_modules', 'rxjs')
       }
     },
     plugins: [

@@ -3,6 +3,8 @@ import router from './router'
 import store from './store'
 
 export default function (v) {
-  registModule({ router, store }).then(v)
+  registModule({ router, store }).then(v).then((app: any)=>{
+    app.use(store)
+  })
 }
 

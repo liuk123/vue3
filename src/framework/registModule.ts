@@ -1,7 +1,6 @@
 const dynamicModules = require('vue-dynamic-modules')
 function regist ({ router, store }, moudle) {
   if (moudle.router) {
-    // moudle.router(router)
     moudle.router.forEach(v=>{
       router.addRoute(v)
     })
