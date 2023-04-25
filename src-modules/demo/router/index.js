@@ -1,7 +1,7 @@
 import Hello from '../views/Hello'
 const routes = [
   {
-    path: '/hello', component: Hello
+    path: '/demo/hello', component: Hello
   },
 ]
 export default routes

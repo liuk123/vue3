@@ -9,11 +9,11 @@ const path = require('path')
 const getModulesCount = () => fs.readdirSync('./src-modules/').length
 
 // 获取编译模块
-const modules = 'demo'
+const modules = ['demo','chatmap']
 // 返回模块虚拟
 let buildDynamicModules = []
 if (modules) { // 开发环境
-  buildDynamicModules = modules.split(',').map((module, index) => {
+  buildDynamicModules = modules.map((module, index) => {
     console.log(module)
     // eslint-disable-next-line no-console
     console.log(`编译模块(${index + 1})：${module}\n`)
@@ -122,7 +122,6 @@ module.exports = {
       alias: {
         '@modules': path.resolve(process.cwd(), 'src-modules'),
         '@': path.resolve(process.cwd(), 'src'),
-        Rx: path.join(__dirname, 'node_modules', 'rxjs')
       }
     },
     plugins: [
