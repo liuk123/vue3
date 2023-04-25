@@ -14,7 +14,6 @@ const modules = ['demo','chatmap']
 let buildDynamicModules = []
 if (modules) { // 开发环境
   buildDynamicModules = modules.map((module, index) => {
-    console.log(module)
     // eslint-disable-next-line no-console
     console.log(`编译模块(${index + 1})：${module}\n`)
     fs.access(path.join(`./src-modules/${module}/index.ts`), function (err) {
@@ -122,6 +121,7 @@ module.exports = {
       alias: {
         '@modules': path.resolve(process.cwd(), 'src-modules'),
         '@': path.resolve(process.cwd(), 'src'),
+        // Rx: path.join(__dirname, 'node_modules', 'rxjs')
       }
     },
     plugins: [

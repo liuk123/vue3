@@ -3,6 +3,7 @@ import App from './App.vue'
 import init from '@/framework/init'
 import router from './framework/router'
 import * as echarts from "echarts";
+import axios from 'axios';
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 
@@ -11,6 +12,7 @@ init(()=>{
   app.use(router).use(ElementPlus)
   app.mount('#app')
   app.config.globalProperties.$echarts = echarts
+  app.config.globalProperties.$axios = axios
   return app
 })
 

@@ -134,9 +134,9 @@ export default {
   },
   methods: {
     getMapRegionJson () {
-      const mapUrl = '../../assets/datas/mapdata/province/370000.json'
+      const mapUrl = './assets/datas/mapdata/province/370000.json'
       Promise.all([
-        this.$baseAxios.get(mapUrl)
+        this.$axios.get(mapUrl)
       ]).then(([d]) => {
         this.initMap(d.data)
       })
@@ -161,7 +161,7 @@ export default {
     goCity (name) {
       if (this.cityCode[name]) {
         if (!this.$echarts.getMap(name)) {
-          this.$baseAxios.get(`../../assets/datas/mapdata/city/${this.cityCode[name]}.json`).then(res => {
+          this.$axios.get(`./assets/datas/mapdata/city/${this.cityCode[name]}.json`).then(res => {
             this.$echarts.registerMap(name, res.data)
             this.echartsSetOption(name)
           })
@@ -361,7 +361,7 @@ export default {
   mounted () {
     this.getMapRegionJson()
     setTimeout(() => {
-      this.update()
+      // this.update()
     }, 3000)
   }
 }
