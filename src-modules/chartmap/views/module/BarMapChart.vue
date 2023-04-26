@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: "",
+  name: "BarMapChart",
   props: {},
   components: {},
   data() {
@@ -66,21 +66,15 @@ export default {
               layoutSize: "80%",
               aspectScale: 0.8,
               itemStyle: {
-                areaColor: "#F7FBFF",
+                areaColor: '#1A65C2',
                 borderWidth: 0.4,
-                borderColor: "#4B92E8",
+                borderColor: 'rgba(244,253,255,.7)'
               },
               label: {
                 show: false,
               },
               emphasis: {
-                disabled: true,
-                itemStyle: {
-                  areaColor: "#F7FBFF",
-                },
-                label: {
-                  show: false,
-                },
+                disabled: true
               },
             },
             {
@@ -93,21 +87,15 @@ export default {
               layoutSize: "30%",
               aspectScale: 0.8,
               itemStyle: {
-                areaColor: "#F7FBFF",
+                areaColor: '#1A65C2',
                 borderWidth: 0.4,
-                borderColor: "#4B92E8",
+                borderColor: 'rgba(244,253,255,.7)'
               },
               label: {
                 show: false,
               },
               emphasis: {
-                disabled: true,
-                itemStyle: {
-                  areaColor: "#F7FBFF",
-                },
-                label: {
-                  show: false,
-                },
+                disabled: true
               },
             },
           ],
@@ -226,7 +214,7 @@ export default {
             },
             axisLabel: {
               show: true,
-              color: "#4B5575",
+              color: "#000",
             },
             axisLine: {
               show: false,
