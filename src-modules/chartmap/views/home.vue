@@ -2,7 +2,12 @@
   <div class="grid">
    <div class="column">
     <MPanel title="地图打点下钻画线">
-      <MapChart />
+      <!-- <MapChart style="width: 100%; height: 400px"/> -->
+    </MPanel>
+   </div>
+   <div class="column">
+    <MPanel title="地图柱状图">
+      <BarMapChart style="width: 100%; height: 400px"/>
     </MPanel>
    </div>
   </div>
@@ -10,13 +15,15 @@
 
 <script lang="ts">
 
-import MapChart from './module/MapChart.vue'
+import BarMapChart from './module/BarMapChart.vue'
+// import MapChart from './module/MapChart.vue'
 import MPanel from '../components/MPanel.vue'
 export default {
   name: "Home",
   components:{
-    MapChart,
-    MPanel
+    // MapChart,
+    MPanel,
+    BarMapChart
   },
   data() {
     return {

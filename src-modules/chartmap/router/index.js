@@ -1,7 +1,7 @@
 import Home from '../views/home'
 const routes = [
   {
-    path: '/chatmap/home', component: Home
+    path: '/chartmap/home', component: Home
   },
 ]
 export default routes

@@ -9,7 +9,7 @@ const path = require('path')
 const getModulesCount = () => fs.readdirSync('./src-modules/').length
 
 // 获取编译模块
-const modules = ['demo','chatmap']
+const modules = ['demo', 'chartmap']
 // 返回模块虚拟
 let buildDynamicModules = []
 if (modules) { // 开发环境
@@ -36,10 +36,11 @@ const virtualModules = new VirtualModulesPlugin({
   'node_modules/vue-dynamic-modules.js': `module.exports = [${buildDynamicModules.join(',')}];`
 })
 const isPro = process.env.NODE_ENV === 'production'
+console.log(isPro)
 
-function resolve (dir) {
-  return path.resolve(process.cwd(), dir)
-}
+// function resolve (dir) {
+//   return path.resolve(process.cwd(), dir)
+// }
 const serverProxy = require('./dev.server.proxy.js')
 
 module.exports = {
@@ -54,6 +55,7 @@ module.exports = {
       errors: true
     }
   },
+  publicPath: isPro ? './' : '/',
   productionSourceMap: false,
   css: {
     loaderOptions: {
@@ -80,41 +82,18 @@ module.exports = {
     },
     module: {
       rules: [
-        {
-          test: /\.(svg)(\?.*)?$/,
-          include: [resolve('src/share/icons/svg')],
-          use: [{
-            loader: 'svg-sprite-loader',
-            options: {
-              symbolId: 'icon-[name]'
-            }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true
-            }
-          }]
-        }, {
-          test: /\.(svg)(\?.*)?$/,
-          include: [resolve('node_modules'), resolve('src')],
-          exclude: [resolve('src/share/icons/svg')],
-          use: [
-            {
-              loader: 'url-loader',
-              options: {
-                name: 'img/[hash].[ext]',
-                limit: '1024'
-              }
-            },
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                bypassOnDebug: true
-              }
-            }
-          ]
-        }
+        // {
+        //   test: /\.(jpe?g|png|gif)$/i,
+        //   use: [
+        //     {
+        //       loader: 'url-loader',
+        //       options: {
+        //         limit:10240,
+        //         name:"[name].[ext]",
+        //         esModule: false
+        //       }
+        //     }
+        //   ]}
       ]
     },
     resolve: {
@@ -147,11 +126,11 @@ module.exports = {
     config.plugin('extract-css').use(miniCssExtractPlugin)
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
-    if (process.env.use_analyzer) {
-      config
-        .plugin('webpack-bundle-analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    }
+    // if (process.env.use_analyzer) {
+    //   config
+    //     .plugin('webpack-bundle-analyzer')
+    //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    // }
     if (isPro) {
       config.module
         .rule('images')
@@ -163,9 +142,10 @@ module.exports = {
         .end().use('url-loader').loader('url-loader').tap(options => {
           options.name = 'img/[hash].[ext]'
           options.fallback.options.name = 'img/[hash].[ext]'
+          options.esModule = false
           return options
         })
     }
-    config.module.rule('svg').uses.clear()
+    // config.module.rule('svg').uses.clear()
   }
 }

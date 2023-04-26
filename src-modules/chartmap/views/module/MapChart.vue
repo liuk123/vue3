@@ -12,23 +12,6 @@
       class="view-map"
     >
     </div>
-    <div class="legend-panel">
-      <div
-        class="item"
-        v-for="(item,index) in btnlist"
-        :key="index"
-      >
-        <img :src="item.icon">
-        <div class="content">
-          <div class="name">
-            {{ item.name }}
-          </div>
-          <div class="value">
-            {{ item.value }}
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -76,34 +59,20 @@ export default {
       滨州市: [117.972664, 37.384649],
       菏泽市: [115.473709, 35.237529]
     }
+    this.item = require('../../assets/images/chartmap/icon-txcar.png').default
     return {
-      btnlist: [
-        {
-          icon: require('../../assets/images/chatmap/icon-txcar.png'),
-          name: '通讯车',
-          value: 15
-        }, {
-          icon: require('../../assets/images/chatmap/icon-fdcar.png'),
-          name: '发电车',
-          value: 15
-        }, {
-          icon: require('../../assets/images/chatmap/icon-bzcar.png'),
-          name: '保障车',
-          value: 15
-        }
-      ],
       carData: [
         {
           name: 'jinan1',
-          icon: require('../../assets/images/chatmap/icon-txcar.png'),
+          icon: require('../../assets/images/chartmap/icon-txcar.png').default,
           lnglat: [117.130937, 36.630724]
         }, {
           name: 'weifang',
-          icon: require('../../assets/images/chatmap/icon-fdcar.png'),
+          icon: require('../../assets/images/chartmap/icon-fdcar.png').default,
           lnglat: [119.153951, 36.713374]
         }, {
           name: '34',
-          icon: require('../../assets/images/chatmap/icon-bzcar.png'),
+          icon: require('../../assets/images/chartmap/icon-bzcar.png').default,
           lnglat: [118.047838, 36.826691]
         }
       ],
@@ -361,8 +330,9 @@ export default {
   mounted () {
     this.getMapRegionJson()
     setTimeout(() => {
-      // this.update()
+      this.update()
     }, 3000)
+    console.log(this.item)
   }
 }
 </script>
@@ -371,9 +341,6 @@ export default {
 .map-container{
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-rows: auto 136px;
-  gap: 16px;
   position: relative;
   .title{
     position: absolute;
@@ -384,31 +351,8 @@ export default {
     cursor: pointer;
   }
 }
-.legend-panel{
-  display: flex;
-  justify-content: center;
-  .item{
-    width: 220px;
-    background: url('../../assets/images/chatmap/btn-bg.png') center/100% 100% no-repeat;
-    display: flex;
-    gap: 32px;
-    align-items: center;
-    padding: 37px;
-    box-sizing: border-box;
-    img{
-      width: 42px;
-    }
-    .content{
-      flex: 1 1 auto;
-      .name{
-        color: #B8E6FF;
-        font-size: 16px;
-      }
-      .value{
-        font-size: 21px;
-        color: #fff;
-      }
-    }
-  }
+.view-map{
+  width: 100%;
+  height: 100%;
 }
 </style>

@@ -35,6 +35,8 @@ export default {
 
 <style lang="less" scoped>
 .m-panel {
+  border: 1px solid #ddd;
+  background-color: #000;
   .panel-header {
     display: flex;
     align-items: center;
@@ -44,6 +46,7 @@ export default {
     height: 32px;
     .title {
       text-shadow: 0 0 10px #00c3fb;
+      color: #fff;
     }
   }
 }
