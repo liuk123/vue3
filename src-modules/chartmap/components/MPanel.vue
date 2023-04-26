@@ -37,13 +37,15 @@ export default {
 .m-panel {
   border: 1px solid #ddd;
   background-color: #000;
+  display: grid;
+  grid-template-rows: 32px auto;
+  gap: 8px;
   .panel-header {
     display: flex;
     align-items: center;
     padding: 0px 16px;
     background: rgba(0, 197, 254, 0.2);
     position: relative;
-    height: 32px;
     .title {
       text-shadow: 0 0 10px #00c3fb;
       color: #fff;
