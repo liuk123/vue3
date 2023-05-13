@@ -207,8 +207,11 @@ export default {
       let option = {
         series: [
           {
-            type: "gauge",
-            data: [this.data],
+            type: "bar",
+            data: [80],
+          },{
+            type: "pictorialBar",
+            data: [80],
           },
         ],
       };
@@ -217,6 +220,9 @@ export default {
   },
   mounted() {
     this.init();
+    setTimeout(()=>{
+      this.update()
+    },4000)
   },
 };
 </script>

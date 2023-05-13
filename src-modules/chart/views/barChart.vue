@@ -6,7 +6,7 @@
     </MPanel>
    </div>
    <div class="column">
-    <MPanel title="立体柱状图">
+    <MPanel title="条纹列表柱状图">
       <BarChart1 style="width: 100%; height: 400px"/>
     </MPanel>
    </div>
