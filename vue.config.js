@@ -9,7 +9,7 @@ const path = require('path')
 const getModulesCount = () => fs.readdirSync('./src-modules/').length
 
 // 获取编译模块
-const modules = ['demo', 'chartmap']
+const modules = ['demo', 'chart']
 // 返回模块虚拟
 let buildDynamicModules = []
 if (modules) { // 开发环境

@@ -1,5 +1,13 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <HelloWorld msg="vue3+elementui+echarts DEMO"/>
+   <ol>
+    <li>
+      <router-link to="/chart/home">chart</router-link>
+    </li>
+    <li>
+      <router-link to="/chart/map-chart">vue组件</router-link>
+    </li>
+  </ol>
   <router-view></router-view>
 </template>
 

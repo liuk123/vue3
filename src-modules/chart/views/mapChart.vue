@@ -11,16 +11,11 @@
     </MPanel>
    </div>
    <div class="column">
-    <MPanel title="立体柱状图">
-      <BarChart style="width: 100%; height: 400px"/>
-    </MPanel>
    </div>
   </div>
 </template>
 
 <script lang="ts">
-BarChart
-import BarChart from './module/BarChart.vue'
 import BarMapChart from './module/BarMapChart.vue'
 import MapChart from './module/MapChart.vue'
 import MPanel from '../components/MPanel.vue'
@@ -30,7 +25,6 @@ export default {
     MapChart,
     MPanel,
     BarMapChart,
-    BarChart
   },
   data() {
     return {

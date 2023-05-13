@@ -144,7 +144,7 @@ export default {
       const item = this.cityCode.find(v => v.name === name)
       if (item) {
         if (!this.$echarts.getMap(name)) {
-          this.$baseAxios.get(`./assets/datas/mapdata/city/${item.adcode}.json`).then(res => {
+          this.$axios.get(`./assets/datas/mapdata/city/${item.adcode}.json`).then(res => {
             this.$echarts.registerMap(name, res.data)
             this.echartsSetOption(name)
           })
