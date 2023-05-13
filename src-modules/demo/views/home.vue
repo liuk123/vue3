@@ -1,13 +1,7 @@
 <template>
   <ol>
     <li>
-      <router-link to="/demo/bar-chart">柱状图</router-link>
-    </li>
-    <li>
-      <router-link to="/chart/map-chart">地图echart</router-link>
-    </li>
-    <li>
-      <router-link to="/chart/guage-chart">仪表盘</router-link>
+      <router-link to="/demo/views">组件1</router-link>
     </li>
   </ol>
 </template>

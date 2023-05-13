@@ -1,7 +1,10 @@
-import Hello from '../views/Hello'
+import Home from '../views/home'
+import Views from '../views/views'
 const routes = [
   {
-    path: '/demo/hello', component: Hello
-  },
+    path: '/demo/home', component: Home
+  },{
+    path: '/demo/views', component: Views
+  }
 ]
 export default routes
