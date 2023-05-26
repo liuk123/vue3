@@ -1,7 +1,7 @@
 <template>
   <ol>
     <li>
-      <router-link to="/demo/bar-chart">柱状图</router-link>
+      <router-link to="/chart/bar-chart">柱状图</router-link>
     </li>
     <li>
       <router-link to="/chart/map-chart">地图echart</router-link>

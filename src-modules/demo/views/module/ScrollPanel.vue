@@ -54,7 +54,7 @@ export default {
           data.parentEl.scrollTop += 2;
           this.timer = setTimeout(() => {
             requestAnimationFrame(fn);
-          }, 100);
+          }, 60);
         } else {
           data.parentEl.scrollTop = 0;
           this.timer = setTimeout(() => {
