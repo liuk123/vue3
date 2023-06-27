@@ -79,6 +79,9 @@ export default {
       this.scroll();
     }
   },
+  beforeUnmount(){
+    this.clearInterval()
+  },
   mounted() {}
 };
 </script>

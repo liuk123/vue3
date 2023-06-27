@@ -1,13 +1,13 @@
 <template>
   <HelloWorld msg="vue3+elementui+echarts DEMO"/>
-   <ol>
+   <ul class="menu-list">
     <li>
       <router-link to="/chart/home">chart</router-link>
     </li>
     <li>
       <router-link to="/demo/home">vue组件</router-link>
     </li>
-  </ol>
+  </ul>
   <router-view></router-view>
 </template>
 
@@ -23,5 +23,11 @@ import HelloWorld from './framework/components/HelloWorld.vue';
 export default class App extends Vue {}
 </script>
 
-<style>
+<style lang="less" scoped>
+.menu-list{
+  display: flex;
+  li{
+    width: 80px;
+  }
+}
 </style>
