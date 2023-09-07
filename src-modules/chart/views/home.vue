@@ -4,6 +4,12 @@
       <router-link to="/chart/bar-chart">柱状图</router-link>
     </li>
     <li>
+      <router-link to="/chart/pie-chart">饼图</router-link>
+    </li>
+    <li>
+      <router-link to="/chart/line-chart">折线图</router-link>
+    </li>
+    <li>
       <router-link to="/chart/map-chart">地图echart</router-link>
     </li>
     <li>
