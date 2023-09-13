@@ -17,14 +17,6 @@ export default {
         ];
       },
     },
-    maxData: {
-      type: Number,
-      default: 100,
-    },
-    unit: {
-      type: String,
-      default: "",
-    },
   },
   components: {},
   data() {
