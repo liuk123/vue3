@@ -10,19 +10,26 @@
       <BarChart1 style="width: 100%; height: 400px"/>
     </MPanel>
    </div>
+   <div class="column">
+    <MPanel title="渐变带亮点">
+      <BarChart2 style="width: 100%; height: 400px"/>
+    </MPanel>
+   </div>
   </div>
 </template>
 
 <script lang="ts">
 import BarChart from './module/BarChart.vue'
 import BarChart1 from './module/BarChart1.vue'
+import BarChart2 from './module/BarChart2.vue'
 import MPanel from '../components/MPanel.vue'
 export default {
   name: "Home",
   components:{
     MPanel,
     BarChart,
-    BarChart1
+    BarChart1,
+    BarChart2
   },
   data() {
     return {

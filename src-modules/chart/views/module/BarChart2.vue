@@ -1,7 +1,7 @@
-<!--  -->
 <template>
   <div class="map-container" style="width: 100%; height: 100%"></div>
 </template>
+
 <script>
 export default {
   name: "",
@@ -20,9 +20,17 @@ export default {
       type: Number,
       default: 100
     },
+    styles: {
+      type: Object,
+      default() {
+        return {
+          barColor: "#27FFFF"
+        };
+      }
+    },
     unit: {
       type: String,
-      default: "",
+      default: "个",
     },
   },
   components: {},
@@ -30,15 +38,9 @@ export default {
     this.chart = null;
     return {};
   },
-  watch: {
-    data() {
-      if (this.chart) {
-        this.update();
-      }
-    },
-  },
   methods: {
     init() {
+      // console.log(this.styles)
       if (this.chart === null) {
         this.chart = this.$echarts.init(this.$el);
       }
@@ -47,26 +49,26 @@ export default {
           left: "5%",
           right: "5%",
           bottom: "0%",
-          top: "40%",
+          top: "40%"
         },
         xAxis: [
           {
             type: "value",
             axisLabel: {
-              show: false,
+              show: false
             },
             min: 0,
             max: this.maxData,
             splitNumber: 5,
             splitLine: {
-              show: false,
+              show: false
             },
             axisLine: {
-              show: false,
+              show: false
             },
             axisTick: {
-              show: false,
-            },
+              show: false
+            }
           }
         ],
         yAxis: [
@@ -90,18 +92,18 @@ export default {
                 a: {
                   color: "transparent",
                   lineHeight: 30
-                },
-              },
+                }
+              }
             },
             splitLine: {
-              show: false,
+              show: false
             },
             axisTick: {
-              show: false,
+              show: false
             },
             axisLine: {
-              show: false,
-            },
+              show: false
+            }
           },
 
           {
@@ -125,14 +127,14 @@ export default {
                 textShadowOffsetY: 0,
                 textShadowBlur: 5,
               // },
-              formatter: (value) => {
+              formatter: value => {
                 return "{x|" + value + this.data.unit + "}";
               },
               rich: {
                 y: {
                   color: "#3dffef",
                   fontSize: this.fontSize,
-                  lineHeight: 18,
+                  lineHeight: 18
                 },
                 x: {
                   color: "#2FD4FE",
@@ -141,11 +143,11 @@ export default {
                   textShadowColor: "rgba(59,215,255,0.50)",
                   textShadowOffsetX: 0,
                   textShadowOffsetY: 0,
-                  textShadowBlur: 5,
-                },
-              },
-            },
-          },
+                  textShadowBlur: 5
+                }
+              }
+            }
+          }
         ],
         series: [
           {
@@ -153,104 +155,97 @@ export default {
             type: "bar",
             showBackground: true,
             backgroundStyle: {
-              color: 'rgba(58,102,123,0.60)'
+              color: "rgba(58,102,123,0.60)"
             },
             padding: 10,
             label: {
-              show: false,
+              show: false
             },
             itemStyle: {
+           
                 borderRadius: 0,
                 color: {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "rgba(47,191,229,0.4)", // 0% 处的颜色
+                      color: "#000" // 0% 处的颜色
                     },
                     {
-                      offset: 1,
-                      color: "rgba(61,239,255,0.90) ", // 100% 处的颜色
-                    },
-                  ],
-                },
+                      offset: 0.8,
+                      color: this.styles.barColor // 100% 处的颜色
+                    }
+                  ]
+                }
+              
             },
             barWidth: 4,
-            data: [this.data.value],
+            data: [this.data.value]
           },
           {
             // 分隔
             type: "pictorialBar",
-            symbolRotate: "-25",
             itemStyle: {
-           
-                color: "rgba(1, 12, 38, 0.4)",
               
+                color: {
+                  type: "radial",
+                  x: 0.5,
+                  y: 0.5,
+                  r: 0.5,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "white" // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: this.styles.barColor // 100% 处的颜色
+                    }
+                  ],
+                  global: false // 缺省为 false
+                }
+             
             },
-            symbolRepeat: "fixed",
-            symbolMargin: 6,
-            symbol: "rect",
+            symbol: "circle",
             symbolClip: true,
-            symbolSize: [5, 6],
-            symbolPosition: "start",
+            symbolSize: 10,
+            symbolPosition: "end",
+            symbolRepeat: false,
             symbolOffset: [0, 0],
             data: [this.data.value],
             z: 66,
-            animationEasing: "elasticOut",
+            animationEasing: "elasticOut"
           }
-        ],
+        ]
       };
       this.chart.setOption(option);
     },
-    update() {
+    update(val) {
       let option = {
         series: [
           {
             type: "bar",
-            data: [80],
-          },{
-            type: "pictorialBar",
-            data: [80],
+            data: [val]
           },
-        ],
+          {
+            type: "pictorialBar",
+            data: [val]
+          }
+        ]
       };
       this.chart?.setOption(option);
-    },
+    }
+  },
+  watch: {
+    // data: {
+    //   handler(val) {
+    //     this.update(val);
+    //   }
+    // }
   },
   mounted() {
     this.init();
-    setTimeout(()=>{
-      this.update()
-    },4000)
-  },
+  }
 };
 </script>
 
-<style lang="less" scoped>
-.pie-container {
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  position: relative;
-  .value {
-    position: absolute;
-    left: 50%;
-    width: 180px;
-    height: 180px;
-    line-height: 180px;
-    text-align: center;
-    margin-left: -90px;
-    top: 50%;
-    margin-top: -90px;
-    color: #2fd4fe;
-    .number {
-      font-size: 36px;
-      font-family: Bender;
-    }
-    .unit {
-      font-size: 24px;
-    }
-  }
-}
-</style>
+<style></style>

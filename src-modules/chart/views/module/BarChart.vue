@@ -128,9 +128,9 @@ export default {
             z: 101,
             zlevel: 1,
             itemStyle: {
-              normal: {
+            
                 color: this.itemStyle[index].end
-              }
+              
             }
           })
         option.series.push(
