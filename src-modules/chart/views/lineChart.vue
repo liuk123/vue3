@@ -38,5 +38,6 @@ export default {
 .grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
+  grid-auto-flow: row dense;
 }
 </style>

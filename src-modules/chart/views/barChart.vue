@@ -15,6 +15,11 @@
       <BarChart2 style="width: 100%; height: 400px"/>
     </MPanel>
    </div>
+   <div class="column">
+    <MPanel title="HTML">
+      <BarChart3 style="width: 100%; height: 400px"/>
+    </MPanel>
+   </div>
   </div>
 </template>
 
@@ -22,6 +27,7 @@
 import BarChart from './module/BarChart.vue'
 import BarChart1 from './module/BarChart1.vue'
 import BarChart2 from './module/BarChart2.vue'
+import BarChart3 from './module/BarChart3.vue'
 import MPanel from '../components/MPanel.vue'
 export default {
   name: "Home",
@@ -29,7 +35,8 @@ export default {
     MPanel,
     BarChart,
     BarChart1,
-    BarChart2
+    BarChart2,
+    BarChart3
   },
   data() {
     return {
@@ -52,5 +59,6 @@ export default {
 .grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
+  grid-auto-flow: row dense;
 }
 </style>
