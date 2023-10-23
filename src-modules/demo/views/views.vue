@@ -13,23 +13,26 @@
     </MPanel>
    </div>
    <div class="column">
+      <MPanel title="table">
+        <MTable />
+      </MPanel>
    </div>
   </div>
 </template>
 
 <script lang="ts">
-// Honey
-// 
 import MPanel from '../components/MPanel.vue'
 
 import ScrollPanel from './module/ScrollPanel.vue'
 import Honeycomb from './module/Honeycomb.vue'
+import MTable from './module/MTable.vue'
 export default {
   name: "Views",
   components:{
     MPanel,
     Honeycomb,
-    ScrollPanel
+    ScrollPanel,
+    MTable
   },
   data() {
     return {
@@ -54,5 +57,6 @@ export default {
 .grid{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(500px, 3fr));
+  grid-auto-flow: row dense;
 }
 </style>

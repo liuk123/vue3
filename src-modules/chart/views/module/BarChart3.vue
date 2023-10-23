@@ -1,14 +1,8 @@
 <template>
-  <div class="top-grid" style="width: 100%;height: 100%;">
+  <div class="top-grid">
     <div class="chart-item" v-for="(item, index) in data" :key="index">
       <div class="text-row">
-        <div
-          class="index"
-          :style="{
-            backgroundImage:
-              'linear-gradient(90deg, ' + styles.barColor + ', transparent)'
-          }"
-        >
+        <div class="index">
           {{ item.index }}
         </div>
         <div class="title">{{ item.name }}</div>
@@ -21,15 +15,10 @@
         <div
           class="bar"
           :style="{
-            width: item.value + '%',
-            backgroundImage:
-              'linear-gradient(to right, transparent, ' + styles.barColor + ')'
+            width: item.value + '%'
           }"
         ></div>
-        <div
-          class="pointer"
-          :style="{ boxShadow: '0 0 7px 3px ' + styles.barColor }"
-        ></div>
+        <div class="pointer"></div>
       </div>
     </div>
   </div>
@@ -50,13 +39,13 @@ export default {
             unit: "%"
           },
           {
-            index: 1,
+            index: 2,
             name: "AAA",
             value: 60,
             unit: "%"
           },
           {
-            index: 1,
+            index: 3,
             name: "AAA",
             value: 60,
             unit: "%"
@@ -109,14 +98,6 @@ export default {
     maxData: {
       type: Number,
       default: 100
-    },
-    styles: {
-      type: Object,
-      default() {
-        return {
-          barColor: "#27FFFF"
-        };
-      }
     }
   },
   components: {},
@@ -136,47 +117,89 @@ export default {
   gap: 8px;
   align-items: center;
   .index {
+    color: #fff;
     line-height: 20px;
     text-align: center;
     border-radius: 4px;
     transform: skewX(-22deg);
-    color: #fff;
+    background-image: linear-gradient(90deg, #27ffff, transparent);
   }
   .title {
     color: #fff;
+  }
+  .value {
+    color: #27ffff;
   }
 }
 .bar-row {
   height: 4px;
   background-color: #041e3b;
   margin-top: 4px;
-  border-radius: 2px;
   display: flex;
   align-items: center;
   .bar {
     height: 100%;
+    background-image: linear-gradient(to right, transparent, #27ffff);
   }
   .pointer {
     width: 6px;
     height: 6px;
     background-color: #fff;
-    // border: 2px solid;
     border-radius: 50%;
     margin-left: -4px;
+    box-shadow: 0 0 7px 3px #27ffff;
   }
 }
 
 .top-grid {
+  width: 100%;height: 100%;
   display: grid;
   padding: 16px;
   box-sizing: border-box;
   grid-template-rows: repeat(5, 1fr);
   grid-auto-flow: column dense;
   column-gap: 16px;
-  .chart-item{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+}
+.chart-item:nth-child(1) {
+  .index {
+    background-image: linear-gradient(90deg, #d2282b, transparent);
+  }
+  .bar {
+    background-image: linear-gradient(to right, transparent, #d2282b);
+  }
+  .value {
+    color: #d2282b;
+  }
+  .pointer {
+    box-shadow: 0 0 7px 3px #d2282b;
+  }
+}
+.chart-item:nth-child(2) {
+  .index {
+    background-image: linear-gradient(90deg, #E47A2E, transparent);
+  }
+  .bar {
+    background-image: linear-gradient(to right, transparent, #E47A2E);
+  }
+  .value {
+    color: #E47A2E;
+  }
+  .pointer {
+    box-shadow: 0 0 7px 3px #E47A2E;
+  }
+}
+.chart-item:nth-child(3) {
+  .index {
+    background-image: linear-gradient(90deg, #FFC455, transparent);
+  }
+  .bar {
+    background-image: linear-gradient(to right, transparent, #FFC455);
+  }
+  .value {
+    color: #FFC455;
+  }
+  .pointer {
+    box-shadow: 0 0 7px 3px #FFC455;
   }
 }
 </style>

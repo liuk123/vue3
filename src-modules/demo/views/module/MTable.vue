@@ -1,26 +1,22 @@
-<!--  -->
 <template>
-  <div style="width:100%;height:100%;">
+  <div class="table-container">
     <table class="table-th table">
       <thead>
         <tr>
           <th
-            v-for="(item, key) in headerData"
-            :key="key"
-            :style="{ width: item.width }"
+            v-for="(item, index) in headerData"
+            :key="index"
+            :style="item.styles"
           >
             {{ item.name }}
           </th>
-          <th
-            v-if="opt && opt.length > 0"
-            :style="{ width: opt[0].width }"
-          >
+          <th v-if="opt && opt.length > 0" :style="{ width: opt[0].width }">
             操作
           </th>
         </tr>
       </thead>
     </table>
-    <div :style="{ height: height + 'px', 'overflow-y': 'auto' }">
+    <div>
       <table class="table-tr table">
         <thead>
           <tr
@@ -28,33 +24,31 @@
             :key="index"
             :class="{
               active:
-                active && active.value && active.value == item[active.code]
+                active && active.code && active?.value == item[active.code]
             }"
           >
             <td
-              v-for="(cell, key) in headerData"
-              :key="key"
-              :title="item[key]"
-              :style="{ width: cell.width }"
+              v-for="(cell, subIndex) in headerData"
+              :key="subIndex"
+              :title="item[cell.code]"
+              :style="cell.styles"
             >
               <span
-                v-if="cell.type == 'option' && cell.option[item[key]]"
-                :style="cell.style"
-              >{{ cell.option[item[key]] }}</span>
+                v-if="cell.type == 'option' && cell.option[item[cell.code]]"
+                >{{ cell.option[item[cell.code]] }}</span
+              >
               <template v-else>
-                <span v-if="item[key]">{{ item[key] }}</span>
+                <span v-if="item[cell.code]">{{ item[cell.code] }}</span>
               </template>
             </td>
-            <td
-              v-if="opt && opt.length > 0"
-              :style="{ width: opt[0].width }"
-            >
+            <td v-if="opt && opt.length > 0" :style="{ width: opt[0].width }">
               <span
-                v-for="(cell) in opt"
-                :key="cell"
-                style="font-size: 1em;color:#33d1ff; cursor:pointer;"
+                v-for="(cell, optIndex) in opt"
+                :key="optIndex"
+                style="font-size: 1em;color:#33d1ff; cursor:pointer;user-select: none;"
                 @click="cell.fn(item)"
-              >{{ cell.title }}</span>
+                >{{ cell.title }}</span
+              >
             </td>
           </tr>
         </thead>
@@ -64,15 +58,55 @@
 </template>
 <script>
 export default {
-  name: '',
+  name: "",
   props: {
     headerData: {
-      type: Object,
-      default: () => ({})
+      type: Array,
+      default: () => [
+      {
+        code: "text1",
+        name: "网元名称",
+        styles: {
+          width: "200px"
+        }
+      },
+      {
+        code: "text2",
+        name: "告警发生时间",
+        styles: {
+          width: "200px"
+        }
+      },
+      {
+        code: "text3",
+        name: "工单号",
+        styles: {
+          width: "200px"
+        }
+      },
+      {
+        code: "text4",
+        name: "工单处理人",
+        styles: {
+          width: "200px"
+        }
+      }]
     },
     tableData: {
       type: Array,
-      default: () => []
+      default: () => [
+        {
+          text1: 12,
+          text2: 12,
+          text3: 12,
+          text4: 12
+        },{
+          text1: 13,
+          text2: 13,
+          text3: 13,
+          text4: 13
+        },
+      ]
     },
     height: {
       type: Number,
@@ -88,18 +122,28 @@ export default {
     }
   },
   components: {},
-  data () {
-    return {}
+  data() {
+    return {};
   },
   methods: {}
-}
+};
 </script>
 
 <style lang="less" scoped>
+.table-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 24px 1fr;
+}
 .table {
   line-height: 1.7em;
   table-layout: fixed;
   border-collapse: collapse;
+  .tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   th {
     font-size: 18px;
     text-align: left;
@@ -130,14 +174,5 @@ export default {
     rgba(255, 51, 55, 0.4) 51%,
     rgba(255, 51, 55, 0.1) 100%
   );
-  // border-image: linear-gradient(
-  //     90deg,
-  //     rgba(255, 51, 55, 0.1) 0%,
-  //     rgba(255, 51, 55, 0.4) 51%,
-  //     rgba(255, 51, 55, 0.1) 100%
-  //   )
-  //   1;
-  // border-style: solid;
-  // border-width: 1px 0 1px 0;
 }
 </style>
