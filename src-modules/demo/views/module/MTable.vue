@@ -18,7 +18,7 @@
     </table>
     <div>
       <table class="table-tr table">
-        <thead>
+        <tbody>
           <tr
             v-for="(item, index) in tableData"
             :key="index"
@@ -51,7 +51,7 @@
               >
             </td>
           </tr>
-        </thead>
+        </tbody>
       </table>
     </div>
   </div>
@@ -146,7 +146,6 @@ export default {
   }
   th {
     font-size: 18px;
-    text-align: left;
     width: 20%;
     color: #33d1ff;
     padding: 0 8px;
