@@ -16,7 +16,7 @@
         </tr>
       </thead>
     </table>
-    <div>
+    <div style="overflow: auto;">
       <table class="table-tr table">
         <tbody>
           <tr
