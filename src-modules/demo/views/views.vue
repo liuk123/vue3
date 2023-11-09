@@ -1,6 +1,6 @@
 <template>
   <div class="grid">
-   <div class="column">
+   <!-- <div class="column">
     <MPanel title="蜂窝图">
       <Honeycomb style="width: 100%; height: 400px"/>
     </MPanel>
@@ -16,23 +16,29 @@
       <MPanel title="table">
         <MTable />
       </MPanel>
+   </div> -->
+   <div class="column">
+      <MPanel title="calendar">
+        <Calendar />
+      </MPanel>
    </div>
   </div>
 </template>
 
 <script lang="ts">
+import Calendar from './module/Calendar.vue'
 import MPanel from '../components/MPanel.vue'
-
-import ScrollPanel from './module/ScrollPanel.vue'
-import Honeycomb from './module/Honeycomb.vue'
-import MTable from './module/MTable.vue'
+// import ScrollPanel from './module/ScrollPanel.vue'
+// import Honeycomb from './module/Honeycomb.vue'
+// import MTable from './module/MTable.vue'
 export default {
   name: "Views",
   components:{
     MPanel,
-    Honeycomb,
-    ScrollPanel,
-    MTable
+    // Honeycomb,
+    // ScrollPanel,
+    Calendar,
+    // MTable
   },
   data() {
     return {
@@ -47,7 +53,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$refs.scrollPanel.startInterval()
+      // this.$refs.scrollPanel.startInterval()
     })
   }
 };
