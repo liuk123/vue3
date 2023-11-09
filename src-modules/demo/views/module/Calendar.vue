@@ -96,8 +96,8 @@ export default {
           color: "#3f9",
         },
         {
-          startTime: new Date("2023/11/9 00:00:00"),
-          endTime: new Date("2023/11/10 12:00:00"),
+          startTime: new Date("2023/11/8 00:00:00"),
+          endTime: new Date("2023/11/9 12:00:00"),
           name: "任务7",
           color: "#3f9",
         },
@@ -244,7 +244,7 @@ export default {
 <style lang="less" scoped>
 .calendar-container {
   color: #fff;
-  height: 400px;
+  height: 100%;
   grid-template-rows: 40px auto;
   display: grid;
 }
