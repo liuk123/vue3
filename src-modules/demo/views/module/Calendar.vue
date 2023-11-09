@@ -1,25 +1,55 @@
 <template>
   <div class="calendar-container">
     <div class="calender-bar">
-      {{ currentYear }}
-      {{ currentMonth }}
+      <span class="year">
+        {{ currentYear }}
+      </span>
+      <span class="month">
+        {{ currentMonth }}
+      </span>
+      <span style="flex:1 1 auto"></span>
+      <button
+        @click="prevMonth"
+        class="canlender-btn"
+        style="margin-right: 8px;"
+      >
+        上个月
+      </button>
+      <button
+        @click="nextMonth"
+        class="canlender-btn"
+      >
+        下个月
+      </button>
+    </div>
+    <div class="weeks">
+      <div
+        class="week-item"
+        v-for="(item) in lang.weeks"
+        :key="item"
+      >
+        {{ item }}
+      </div>
     </div>
     <div class="calendar-content">
       <div
         class="calendar-item"
         v-for="(item, index) in monthDays"
         :key="index"
-        @click="ck"
       >
-        <div class="time">{{ item.date }}</div>
+        <div class="time">
+          {{ item.date }}
+        </div>
         <div class="task"></div>
       </div>
       <div class="model">
-        <template v-for="(items, index) in planData" :key="index">
+        <template
+          v-for="(items,i) in planData"
+        >
           <div
             class="bar"
             v-for="(item, index) in items.pos"
-            :key="index"
+            :key="index+i"
             :style="{
               width: item.width + 'px',
               height: item.height + 'px',
@@ -37,168 +67,166 @@
 </template>
 <script>
 export default {
-  name: "",
+  name: '',
   props: {},
   components: {},
-  data() {
+  data () {
     this.lang = {
-      weeks: ["日", "一", "二", "三", "四", "五", "六"],
-      time: ["时", "分"],
-      timeTips: "选择时间",
-      startTime: "开始时间",
-      endTime: "结束时间",
-      dateTips: "返回日期",
-      month: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+      weeks: ['一', '二', '三', '四', '五', '六', '日'],
+      time: ['时', '分'],
+      timeTips: '选择时间',
+      startTime: '开始时间',
+      endTime: '结束时间',
+      dateTips: '返回日期',
+      month: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
       tools: {
-        confirm: "确定",
-        cancel: "取消",
-      },
-    };
+        confirm: '确定',
+        cancel: '取消'
+      }
+    }
     return {
       monthDays: null, // 日历数据
-      currentMonth: 11, //日历显示月份
-      currentYear: 2023, //日历显示月份
+      currentMonth: 11, // 日历显示月份
+      currentYear: 2023, // 日历显示月份
       data: [
         {
-          startTime: new Date("2023/11/5 00:00:00"),
-          endTime: new Date("2023/11/30 12:00:00"),
-          name: "任务1",
-          color: "#f00",
+          startTime: new Date('2023/11/5 00:00:00'),
+          endTime: new Date('2023/11/30 12:00:00'),
+          name: '任务1',
+          color: '#f00'
         },
         {
-          startTime: new Date("2023/11/22 00:00:00"),
-          endTime: new Date("2023/11/24 12:00:00"),
-          name: "任务2",
-          color: "#ff0",
+          startTime: new Date('2023/11/22 00:00:00'),
+          endTime: new Date('2023/11/24 12:00:00'),
+          name: '任务2',
+          color: '#ff0'
         },
         {
-          startTime: new Date("2023/11/8 00:00:00"),
-          endTime: new Date("2023/11/9 12:00:00"),
-          name: "任务3",
-          color: "#f0f",
+          startTime: new Date('2023/11/8 00:00:00'),
+          endTime: new Date('2023/11/9 12:00:00'),
+          name: '任务3',
+          color: '#f0f'
         },
         {
-          startTime: new Date("2023/11/12 00:00:00"),
-          endTime: new Date("2023/11/13 12:00:00"),
-          name: "任务4",
-          color: "#0ff",
+          startTime: new Date('2023/11/12 00:00:00'),
+          endTime: new Date('2023/11/13 12:00:00'),
+          name: '任务4',
+          color: '#0ff'
         },
         {
-          startTime: new Date("2023/11/9 00:00:00"),
-          endTime: new Date("2023/11/10 12:00:00"),
-          name: "任务5",
-          color: "#3f9",
+          startTime: new Date('2023/11/9 00:00:00'),
+          endTime: new Date('2023/11/10 12:00:00'),
+          name: '任务5',
+          color: '#3f9'
         },
         {
-          startTime: new Date("2023/11/9 00:00:00"),
-          endTime: new Date("2023/11/10 12:00:00"),
-          name: "任务6",
-          color: "#3f9",
+          startTime: new Date('2023/11/9 00:00:00'),
+          endTime: new Date('2023/11/10 12:00:00'),
+          name: '任务6',
+          color: '#3f9'
         },
         {
-          startTime: new Date("2023/11/8 00:00:00"),
-          endTime: new Date("2023/11/9 12:00:00"),
-          name: "任务7",
-          color: "#3f9",
-        },
+          startTime: new Date('2023/11/8 00:00:00'),
+          endTime: new Date('2023/11/9 12:00:00'),
+          name: '任务7',
+          color: '#3f9'
+        }
       ],
-      planData: null,
-    };
+      planData: null
+    }
   },
   methods: {
-    getMonthCalendarData(year, month) {
-      const date = new Date(year, month, 0);
-      const allDate = date.getDate(); // 一个月有多少天,最后一天是几号
-      const lastDay = date.getDay(); // 一个月最后一天是周几
+    getMonthCalendarData (year, month) {
+      const date = new Date(year, month, 0)
+      const allDate = date.getDate() // 一个月有多少天,最后一天是几号
+      const lastDay = date.getDay() // 一个月最后一天是周几
 
-      let lastNum = 7 - lastDay;
-      const firstNum = 7 - ((allDate + lastNum) % 7);
-      const other = firstNum + lastNum;
+      const lastNum = 7 - lastDay
+      const firstNum = 7 - ((allDate + lastNum) % 7)
+      const other = firstNum + lastNum
 
-      let arr = new Array(allDate + other);
+      const arr = new Array(allDate + other)
       for (let i = 0; i < allDate + other; i++) {
-        let t = new Date(year, month - 1, i - firstNum + 1);
+        const t = new Date(year, month - 1, i - firstNum + 1)
         arr[i] = {
           time: t,
-          date: t.getDate(),
-        };
-      }
-      return arr;
-    },
-    chunkArray(arr, n) {
-      let data = new Array(Math.ceil(arr.length / n));
-      for (let i = 0; i < data.length; i++) {
-        let rows = new Array(n);
-        for (let j = 0; j < n; j++) {
-          rows[j] = arr[i * n + j];
+          date: t.getDate()
         }
-        data[i] = rows;
       }
-      return data;
+      return arr
     },
-    compareDate(d1, d2) {
-      let t1 = new Date(
+    chunkArray (arr, n) {
+      const data = new Array(Math.ceil(arr.length / n))
+      for (let i = 0; i < data.length; i++) {
+        const rows = new Array(n)
+        for (let j = 0; j < n; j++) {
+          rows[j] = arr[i * n + j]
+        }
+        data[i] = rows
+      }
+      return data
+    },
+    compareDate (d1, d2) {
+      const t1 = new Date(
         d1.getFullYear(),
         d1.getMonth(),
         d1.getDate()
-      ).getTime();
-      let t2 = new Date(
+      ).getTime()
+      const t2 = new Date(
         d2.getFullYear(),
         d2.getMonth(),
         d2.getDate()
-      ).getTime();
-      return t1 == t2;
+      ).getTime()
+      return t1 === t2
     },
-    mapPlan(monthDays, data) {
-      let ret = [];
+    mapPlan (monthDays, data) {
+      const ret = []
       data.forEach((v) => {
-        let tem = [];
-        let startIndex = null;
-        let index = 0;
+        const tem = []
+        let startIndex = null
+        let index = 0
         while (index < monthDays.length) {
           if (this.compareDate(v.startTime, monthDays[index].time)) {
-            startIndex = index;
+            startIndex = index
           }
-          if (monthDays[index].time.getDay() == 0 && startIndex) {
+          if (monthDays[index].time.getDay() === 0 && startIndex) {
             tem.push({
-              startIndex: startIndex,
-              endIndex: index,
-            });
-            startIndex = index + 1;
+              startIndex,
+              endIndex: index
+            })
+            startIndex = index + 1
           }
-          if (this.compareDate(v.endTime, monthDays[index].time)) {
-            if (startIndex <= index) {
+          if (this.compareDate(v.endTime, monthDays[index].time) && startIndex) {
+            if (startIndex != null && startIndex <= index) {
               tem.push({
-                startIndex: startIndex,
-                endIndex: index,
-              });
+                startIndex,
+                endIndex: index
+              })
             }
-            break;
+            break
           }
-          index++;
+          index++
         }
         ret.push({
           data: v,
-          pos: tem,
-        });
-      });
-      return ret;
+          pos: tem
+        })
+      })
+      return ret
     },
-    setIndex(data) {
+    setIndex (data) {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].pos.length; j++) {
-          for(let a=i+1; a < data.length; a++){
-            for(let b=0; b < data[a].pos.length; b++){
+          for (let a = i + 1; a < data.length; a++) {
+            for (let b = 0; b < data[a].pos.length; b++) {
               if (
-                data[a].pos[b].startIndex >= data[i].pos[j].startIndex &&
-                data[a].pos[b].startIndex <= data[i].pos[j].endIndex ||
-                data[a].pos[b].endIndex >= data[i].pos[j].startIndex &&
-                data[a].pos[b].endIndex <= data[i].pos[j].endIndex
+                (data[a].pos[b].startIndex >= data[i].pos[j].startIndex && data[a].pos[b].startIndex <= data[i].pos[j].endIndex) ||
+                (data[a].pos[b].endIndex >= data[i].pos[j].startIndex && data[a].pos[b].endIndex <= data[i].pos[j].endIndex)
               ) {
-                if(!data[a].pos[b].posIndex || (data[a].pos[b].posIndex <= (data[i].pos[j].posIndex??0) + 1)){
-                  data[a].pos[b].posIndex = (data[i].pos[j].posIndex??0) + 1;
+                if (!data[a].pos[b].posIndex || (data[a].pos[b].posIndex <= (data[i].pos[j].posIndex ?? 0) + 1)) {
+                  data[a].pos[b].posIndex = (data[i].pos[j].posIndex ?? 0) + 1
                 }
-                break;
+                break
               }
             }
           }
@@ -206,47 +234,90 @@ export default {
       }
       return data
     },
-    setPosition(data, doms) {
+    setPosition (data, doms) {
       data.forEach((d) => {
         d.pos.forEach((v) => {
-          v.left = doms[v.startIndex].offsetLeft;
-          v.top = doms[v.startIndex].offsetTop + 13 * (v.posIndex??0);
+          v.left = doms[v.startIndex].offsetLeft
+          v.top = doms[v.startIndex].offsetTop + 13 * (v.posIndex ?? 0)
           v.width =
             doms[v.endIndex].getBoundingClientRect().right -
-            doms[v.startIndex].getBoundingClientRect().left;
-          v.height = 12;
-        });
-      });
-      return data;
+            doms[v.startIndex].getBoundingClientRect().left
+          v.height = 12
+        })
+      })
+      return data
     },
-    ck() {
-      // let el = this.$el.querySelector('.model')
-      // el.remove()
+    /** 初始化 */
+    switchMonth (currentYear, currentMonth) {
+      this.monthDays = this.getMonthCalendarData(
+        currentYear,
+        currentMonth
+      )
+      this.$emit('dateChange', this.currentMonth)
     },
+    /** 赋值，刷新数据 */
+    setData (data) {
+      let ret = this.mapPlan(this.monthDays, data)
+      const doms = Array.from(this.$el.querySelectorAll('.calendar-item'))
+      ret = this.setIndex(ret)
+      this.planData = this.setPosition(ret, doms)
+    },
+    prevMonth () {
+      if (this.currentMonth === 1) {
+        this.currentYear--
+        this.currentMonth = 12
+      } else {
+        this.currentMonth--
+      }
+      this.switchMonth(this.currentYear, this.currentMonth)
+      this.$nextTick(() => {
+        this.setData(this.data)
+      })
+    },
+    nextMonth () {
+      if (this.currentMonth === 12) {
+        this.currentYear++
+        this.currentMonth = 1
+      } else {
+        this.currentMonth++
+      }
+      this.switchMonth(this.currentYear, this.currentMonth)
+      this.$nextTick(() => {
+        this.setData(this.data)
+      })
+    },
+
   },
-  mounted() {
-    this.monthDays = this.getMonthCalendarData(
-      this.currentYear,
-      this.currentMonth
-    );
-    let ret = this.mapPlan(this.monthDays, this.data);
-    console.log("ret", ret);
+  mounted () {
+    this.switchMonth(this.currentYear, this.currentMonth)
     this.$nextTick(() => {
-      let doms = Array.from(this.$el.querySelectorAll(".calendar-item"));
-      ret = this.setIndex(ret);
-      this.planData = this.setPosition(ret, doms);
-      console.log(this.planData);
-    });
-  },
-};
+      this.setData(this.data)
+    })
+  }
+}
 </script>
 
 <style lang="less" scoped>
 .calendar-container {
   color: #fff;
   height: 100%;
-  grid-template-rows: 40px auto;
+  grid-template-rows: 32px 24px auto;
   display: grid;
+  .calender-bar{
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    .year{
+      margin-right: 8px;
+    }
+  }
+}
+.canlender-btn{
+  background-color: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  border-width: 0;
+  color: #fff;
+  padding: 4px 8px;
 }
 .calendar-content {
   display: grid;
@@ -266,13 +337,19 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 255, 0, 0.3);
   pointer-events: none;
   .bar {
     position: absolute;
     pointer-events: auto;
     font-size: 12px;
     line-height: 12px;
+    border-radius: 2px;
   }
+}
+.weeks{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 </style>
