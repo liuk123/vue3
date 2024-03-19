@@ -7,8 +7,8 @@
     </ol>
     <div class="grid">
       <div class="column">
-        <MPanel title="calendar">
-          <Calendar  style="width: 100%; height: 400px"/>
+        <MPanel title="table 翻页多选择">
+          <MTable  style="width: 100%; height: 400px"/>
         </MPanel>
       </div>
     </div>
@@ -16,11 +16,11 @@
 </template>
 
 <script lang="ts">
+import MTable from './module/MTable1.vue'
 import MPanel from '../components/MPanel.vue'
-import Calendar from './module/Calendar.vue'
 export default {
   name: "Home",
-  components: {Calendar, MPanel},
+  components: {MPanel, MTable},
   data() {
     return {};
   },
