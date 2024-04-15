@@ -7,8 +7,8 @@
     </ol>
     <div class="grid">
       <div class="column">
-        <MPanel title="table 翻页多选择">
-          <MTable  style="width: 100%; height: 400px"/>
+        <MPanel title="输入框编辑">
+          <InputEditor  style="width: 100%; height: 400px"/>
         </MPanel>
       </div>
     </div>
@@ -16,11 +16,11 @@
 </template>
 
 <script lang="ts">
-import MTable from './module/MTable1.vue'
+import InputEditor from './module/InputEditor.vue'
 import MPanel from '../components/MPanel.vue'
 export default {
   name: "Home",
-  components: {MPanel, MTable},
+  components: {MPanel, InputEditor},
   data() {
     return {};
   },
